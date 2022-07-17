@@ -1,0 +1,41 @@
+.wrapper {
+  height: 64px;
+  background-color: var(--primary);
+}
+
+.inner {
+  height: 100%;
+  padding: 0 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 65px;
+  height: 57px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 1.2rem;
+  &-contact {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px 0 20px;
+  }
+
+  &-info {
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+  }
+
+  &-title {
+    margin-left: 2px;
+    display: flex;
+    flex-direction: column;
+  }
+}

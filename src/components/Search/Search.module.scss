@@ -1,0 +1,23 @@
+.search {
+  background-color: #ffff;
+  font-weight: 400;
+  line-height: 18px;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 3.4rem;
+  width: 400px;
+
+  &-inp {
+    flex: 1;
+    outline: none;
+    border: none;
+  }
+
+  &-btn {
+    background-color: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+  }
+}
