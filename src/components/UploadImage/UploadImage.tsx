@@ -5,15 +5,39 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 
 const { TextArea } = Input;
 
-const UploadImage = () => {
+const UploadImage = ({ uploadImage }: any) => {
+  const [base64, setBase64] = React.useState("");
+
+  const handleChangeImage = (event: any) => {
+    const file = event.target.files[0];
+    // previewFile(file)
+    const reader: any = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      uploadImage(reader.result);
+      console.log(reader.result);
+      setBase64(reader.result);
+    };
+  };
+
   return (
     <Container>
       <UploadWrapper>
-        <Button type="dashed" shape="circle" icon={<PlusCircleOutlined />} />
-        <Typography.Title level={5}>Thêm ảnh</Typography.Title>
+        <UploadIcon>
+          <PlusCircleOutlined style={{ fontSize: 30 }} />
+          <input
+            type="file"
+            accept="image/png, image/jpg, image/jpeg, image/gif"
+            name="image"
+            onChange={handleChangeImage}
+          />
+        </UploadIcon>
+
+        {/* <Button type="dashed" shape="circle" icon={<PlusCircleOutlined />} />
+                <Typography.Title level={5}>Thêm ảnh</Typography.Title> */}
+
+        {base64 && <ImagePreview style={{}} src={base64} alt="Image" />}
       </UploadWrapper>
-      <Label>Mô tả ngắn</Label>
-      <TextArea rows={4} placeholder="Mô tả ngắn" />
     </Container>
   );
 };
@@ -33,6 +57,16 @@ const UploadWrapper = styled.div`
   justify-content: center;
   min-height: 200px;
   border: 1px dashed gray;
+`;
+
+const UploadIcon = styled.label`
+  input {
+    display: none;
+  }
+`;
+
+const ImagePreview = styled.img`
+  width: 100%;
 `;
 
 export default UploadImage;

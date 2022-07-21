@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   Typography,
@@ -13,24 +13,55 @@ import {
   message,
 } from "antd";
 import UploadImage from "~/components/UploadImage";
-import { createProduct } from "~/api/product";
-import { useNavigate } from "react-router-dom";
+import { createProduct, getOnce } from "~/api/product";
+import { useNavigate, useParams } from "react-router-dom";
 import { upload } from "~/api/images";
 
 const { TextArea } = Input;
 const { Option } = Select;
 
+interface typeProduct {
+  id: number | null;
+  name: string;
+  feature: string;
+  description: string;
+  originalPrice: null;
+  saleOffPrice: null;
+}
+
 const ProductAdd: React.FC = () => {
   const [uploadedImage, setUploadedImage] = React.useState("");
+  const [product, setProduct] = React.useState<typeProduct>({
+    id: null,
+    name: "",
+    feature: "",
+    description: "",
+    originalPrice: null,
+    saleOffPrice: null,
+  });
 
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  useEffect(() => {
+    const handleGet = async (id: any) => {
+      try {
+        const { data } = await getOnce(id);
+        setProduct((pre) => {
+          return { ...pre, ...data };
+        });
+      } catch (error) {}
+    };
+    handleGet(id);
+  }, [id]);
+
   const onFinish = async (values: any) => {
     console.log("Success:", values);
     const data = { ...values, image: uploadedImage };
 
     try {
       await createProduct(data);
-      message.success("Tạo mới thành công");
+      message.success("Chỉnh sửa thành công");
       // navigate(-1);
     } catch (err) {
       message.error("Có lỗi xảy ra");
@@ -50,11 +81,12 @@ const ProductAdd: React.FC = () => {
       console.log(err);
     }
   };
+  console.log(product);
   return (
     <>
       <Breadcrumb>
         <Typography.Title level={2} style={{ margin: 0 }}>
-          Thêm mới
+          Chinh sua san pham
         </Typography.Title>
       </Breadcrumb>
       <Row gutter={16}>
@@ -62,10 +94,12 @@ const ProductAdd: React.FC = () => {
           <UploadImage uploadImage={uploadImage} />
         </Col>
         <Col span={14}>
-          <Typography.Title level={5}>Thông tin sản phẩm</Typography.Title>
+          <Typography.Title level={5}>Chinh sua sản phẩm</Typography.Title>
           <Form
             // name="product"
-            initialValues={{}}
+            initialValues={{
+              name: product.name,
+            }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="on"

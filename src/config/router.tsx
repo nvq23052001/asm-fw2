@@ -5,6 +5,7 @@ const router = {
   signin: "/signin",
   productsAdmin: "/admin/products",
   addProduct: "/admin/product/add",
+  editProduct: "/admin/product/:id/edit",
 };
 
 export default router;
