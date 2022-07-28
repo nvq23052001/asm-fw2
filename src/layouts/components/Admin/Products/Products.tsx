@@ -98,9 +98,17 @@ const ProductAdminPage = () => {
   }
 
   const handleChange = async (value: { value: string; key: number }) => {
+    let data;
     try {
-      const { data } = await getCateFilter(value.key);
-      setDataTable(data.products);
+      if (value.key) {
+        console.log(value.key);
+        data = await getCateFilter(value.key);
+        setDataTable(data.data.products.reverse());
+      } else {
+        console.log(value.key);
+        data = await getAll();
+        setDataTable(data.data.reverse());
+      }
     } catch {}
   };
 
@@ -137,6 +145,7 @@ const ProductAdminPage = () => {
           style={{ width: 200 }}
           onChange={handleChange}
         >
+          <Option value="">Tat ca</Option>
           {dataCates.map((data: any) => {
             return <Option value={data.id}>{data.name}</Option>;
           })}

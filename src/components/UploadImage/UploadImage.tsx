@@ -5,8 +5,9 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 
 const { TextArea } = Input;
 
-const UploadImage = ({ uploadImage }: any) => {
+const UploadImage = ({ uploadImage, image = null }: any) => {
   const [base64, setBase64] = React.useState("");
+  const [img, setImg] = React.useState(image);
 
   const handleChangeImage = (event: any) => {
     const file = event.target.files[0];
@@ -15,7 +16,7 @@ const UploadImage = ({ uploadImage }: any) => {
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       uploadImage(reader.result);
-      console.log(reader.result);
+
       setBase64(reader.result);
     };
   };
@@ -37,6 +38,9 @@ const UploadImage = ({ uploadImage }: any) => {
                 <Typography.Title level={5}>Thêm ảnh</Typography.Title> */}
 
         {base64 && <ImagePreview style={{}} src={base64} alt="Image" />}
+        {!base64 && image && (
+          <ImagePreview style={{}} src={image} alt="Image" />
+        )}
       </UploadWrapper>
     </Container>
   );

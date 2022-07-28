@@ -13,7 +13,7 @@ function Cart({}: Props) {
         <CartItem />
       </div>
       <div className={cx("total")}>
-        <p className={cx("total-titlr")}>Tổng số tiền</p>
+        <p className={cx("total-title")}>Tổng số tiền</p>
         <p className={cx("total-number")}>25.000.000 VND</p>
       </div>
     </div>

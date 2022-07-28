@@ -31,7 +31,7 @@ const ProductAdd: React.FC = () => {
     try {
       await createProduct(data);
       message.success("Tạo mới thành công");
-      // navigate(-1);
+      navigate(-1);
     } catch (err) {
       message.error("Có lỗi xảy ra");
     }
@@ -106,16 +106,13 @@ const ProductAdd: React.FC = () => {
               <Col span={12}>
                 <Form.Item
                   label="Phân loại"
-                  name="categories"
+                  name="categoryId"
                   rules={[{ required: true }]}
                 >
                   <Select style={{ width: "100%" }} size="large">
-                    <Option value="phone">Điện thoại</Option>
-                    <Option value="laptop">Laptop</Option>
-                    <Option value="accessories" disabled>
-                      Phụ kiện
-                    </Option>
-                    <Option value="tablet">Máy tính bảng</Option>
+                    <Option value={+1}>Điện thoại</Option>
+                    <Option value={+2}>Laptop</Option>
+                    <Option value={+3}>Máy tính bảng</Option>
                   </Select>
                 </Form.Item>
               </Col>

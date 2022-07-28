@@ -13,7 +13,7 @@ import {
   message,
 } from "antd";
 import UploadImage from "~/components/UploadImage";
-import { createProduct, getOnce } from "~/api/product";
+import { createProduct, getOnce, updateProduct } from "~/api/product";
 import { useNavigate, useParams } from "react-router-dom";
 import { upload } from "~/api/images";
 
@@ -25,17 +25,19 @@ interface typeProduct {
   name: string;
   feature: string;
   description: string;
-  originalPrice: null;
-  saleOffPrice: null;
+  image: string;
+  originalPrice: number | null;
+  saleOffPrice: number | null;
 }
 
-const ProductAdd: React.FC = () => {
+const ProductAdd = () => {
   const [uploadedImage, setUploadedImage] = React.useState("");
   const [product, setProduct] = React.useState<typeProduct>({
     id: null,
     name: "",
     feature: "",
     description: "",
+    image: "",
     originalPrice: null,
     saleOffPrice: null,
   });
@@ -47,22 +49,22 @@ const ProductAdd: React.FC = () => {
     const handleGet = async (id: any) => {
       try {
         const { data } = await getOnce(id);
-        setProduct((pre) => {
-          return { ...pre, ...data };
-        });
+        setProduct(data);
       } catch (error) {}
     };
     handleGet(id);
   }, [id]);
-
+  console.log(product);
   const onFinish = async (values: any) => {
-    console.log("Success:", values);
-    const data = { ...values, image: uploadedImage };
+    const data = {
+      ...values,
+      image: uploadedImage ? uploadedImage : product.image,
+    };
 
     try {
-      await createProduct(data);
+      await updateProduct(data, id);
       message.success("Chỉnh sửa thành công");
-      // navigate(-1);
+      navigate(-1);
     } catch (err) {
       message.error("Có lỗi xảy ra");
     }
@@ -81,7 +83,6 @@ const ProductAdd: React.FC = () => {
       console.log(err);
     }
   };
-  console.log(product);
   return (
     <>
       <Breadcrumb>
@@ -91,7 +92,7 @@ const ProductAdd: React.FC = () => {
       </Breadcrumb>
       <Row gutter={16}>
         <Col span={10}>
-          <UploadImage uploadImage={uploadImage} />
+          <UploadImage uploadImage={uploadImage} image={product.image} />
         </Col>
         <Col span={14}>
           <Typography.Title level={5}>Chinh sua sản phẩm</Typography.Title>
@@ -99,6 +100,7 @@ const ProductAdd: React.FC = () => {
             // name="product"
             initialValues={{
               name: product.name,
+              originalPrice: product.originalPrice,
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -140,16 +142,13 @@ const ProductAdd: React.FC = () => {
               <Col span={12}>
                 <Form.Item
                   label="Phân loại"
-                  name="categories"
+                  name="categoryId"
                   rules={[{ required: true }]}
                 >
                   <Select style={{ width: "100%" }} size="large">
-                    <Option value="phone">Điện thoại</Option>
-                    <Option value="laptop">Laptop</Option>
-                    <Option value="accessories" disabled>
-                      Phụ kiện
-                    </Option>
-                    <Option value="tablet">Máy tính bảng</Option>
+                    <Option value={+1}>Điện thoại</Option>
+                    <Option value={+2}>Laptop</Option>
+                    <Option value={+3}>Máy tính bảng</Option>
                   </Select>
                 </Form.Item>
               </Col>
