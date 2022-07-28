@@ -12,24 +12,34 @@
   ],
   "products": [
     {
-      "name": "edit image 1324324",
-      "originalPrice": 12,
-      "saleOffPrice": 11,
+      "name": "Samsung galaxy S22 ultra",
+      "originalPrice": 2000000,
+      "saleOffPrice": 1900000,
+      "categoryId": 1,
+      "feature": "tot",
+      "description": "tot",
+      "image": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1659027664/anhhtus/awdjjp2yujv2unu1he0w.jpg",
+      "id": 1
+    },
+    {
+      "name": "Samsung galaxy S22 ultra 1",
+      "originalPrice": 2000000,
+      "saleOffPrice": 10000000,
+      "categoryId": 1,
+      "feature": "good",
+      "description": "good",
+      "image": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1659027684/anhhtus/jpueibpx6j3epbreshtd.jpg",
+      "id": 2
+    },
+    {
+      "name": "Samsung galaxy S22 ultra 2",
+      "originalPrice": 1000000,
+      "saleOffPrice": 900000,
       "categoryId": 1,
       "feature": "a",
       "description": "b",
-      "image": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658411917/anhhtus/tllynb8kbjs4p5qaqzqw.png",
-      "id": 4
-    },
-    {
-      "name": "1",
-      "originalPrice": 1,
-      "saleOffPrice": 1,
-      "categoryId": 1,
-      "feature": "1",
-      "description": "1",
-      "image": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1658450126/anhhtus/v00ivewucvmtx3v3joza.png",
-      "id": 5
+      "image": "http://res.cloudinary.com/dv3vzmogk/image/upload/v1659027714/anhhtus/rp6zimujsyvbm33qh4cu.jpg",
+      "id": 3
     }
   ]
 }
