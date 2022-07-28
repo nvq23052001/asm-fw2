@@ -4,6 +4,7 @@ import className from "classnames/bind";
 import styles from "./Home.module.scss";
 
 import ProductItem from "~/components/ProductItem";
+import Cart from "~/components/Cart";
 type Props = {};
 
 const cx = className.bind(styles);
@@ -11,9 +12,12 @@ const cx = className.bind(styles);
 function Home({}: Props) {
   return (
     <div className={cx("wrapper")}>
-      <ProductItem />
-      <ProductItem />
-      <ProductItem />
+      <div className={cx("container")}>
+        <ProductItem />
+        <ProductItem />
+        <ProductItem />
+      </div>
+      <Cart />
     </div>
   );
 }

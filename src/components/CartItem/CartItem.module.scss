@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.cart-price {
+  flex: 1;
+  align-items: flex-end;
+  margin-bottom: 0;
+  margin-left: 300px;
+}
+
+.cart-img {
+  width: 50%;
+}
