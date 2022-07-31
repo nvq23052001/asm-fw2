@@ -9,12 +9,20 @@ const cx = className.bind(styles);
 
 function Cart({}: Props) {
   const cart: any = useSelector((state) => state);
-  console.log(cart);
+
+  const currency = (number: number) => {
+    return new Intl.NumberFormat("de-DE", {
+      style: "currency",
+      currency: "VND",
+    }).format(number);
+  };
 
   return (
     <div>
-      <h1>Giỏ hàng</h1>
       <div className={cx("wrapper")}>
+        <div className={cx("header")}>
+          <p className={cx("title")}>Giỏ hàng</p>
+        </div>
         {cart.map((item: any) => {
           if (item.id === null) return;
           return (
@@ -28,18 +36,23 @@ function Cart({}: Props) {
             />
           );
         })}
-      </div>
-      {cart && (
-        <div className={cx("total")}>
-          <p className={cx("total-title")}>Tổng số tiền</p>
-          <p className={cx("total-number")}>
-            {/* {cart.reduce((total: any, curr: any) => {
-              console.log(curr);
-            })} */}
-            VND
-          </p>
+        {cart && (
+          <div className={cx("total")}>
+            <p className={cx("total-title")}>Tổng số tiền:</p>
+            <p className={cx("total-number")}>
+              {currency(
+                cart.reduce((total: any, curr: any) => {
+                  return total + curr.originalPrice * curr.quantity;
+                }, 0)
+              )}
+            </p>
+          </div>
+        )}
+        <div className={cx("btn")}>
+          <button className={cx("btn__order")}>Tiến hành đặt hàng</button>
+          <button className={cx("btn__other")}>Chọn thêm sản phẩm khác</button>
         </div>
-      )}
+      </div>
     </div>
   );
 }

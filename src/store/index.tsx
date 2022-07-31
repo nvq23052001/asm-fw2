@@ -72,6 +72,10 @@ const cartSlice = createSlice({
       const stateCopy = current(state);
       return (state = updateItems);
     },
+    delete: (state, { payload }) => {
+      console.log(payload);
+      return (state = state.filter((item) => item.id !== payload));
+    },
   },
 });
 

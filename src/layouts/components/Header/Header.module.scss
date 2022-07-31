@@ -37,5 +37,10 @@
     margin-left: 2px;
     display: flex;
     flex-direction: column;
+    color: #fff;
+
+    &:hover {
+      color: #fff;
+    }
   }
 }

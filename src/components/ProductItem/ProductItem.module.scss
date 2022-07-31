@@ -3,6 +3,23 @@
 }
 .product-name {
   margin-bottom: 0;
+  font-size: 1.4rem;
+  color: #444444;
+}
+
+.product__price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  &-original {
+    color: #ff4d4f;
+    padding: 0 10px;
+  }
+  &-sale {
+    font-size: 1.4rem;
+    padding: 0 10px;
+  }
 }
 
 .product-btn {
@@ -13,4 +30,11 @@
   border-radius: 2px;
   padding: 5px;
   cursor: pointer;
+}
+
+.deal {
+  background-color: #e5e7eb;
+  padding: 10px;
+  font-size: 1.2rem;
+  border-radius: 5px;
 }

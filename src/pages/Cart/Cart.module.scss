@@ -1,0 +1,13 @@
+.back {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: absolute;
+  left: 30%;
+  top: 80px;
+
+  span {
+    color: #d70018;
+    font-size: 1.4rem;
+  }
+}

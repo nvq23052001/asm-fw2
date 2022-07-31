@@ -18,8 +18,7 @@ function Home({}: Props) {
     const fetchData = async () => {
       try {
         const { data } = await getAll();
-        const result = data;
-        setDataTable(result);
+        setDataTable(data);
       } catch (err) {}
     };
 
@@ -28,7 +27,7 @@ function Home({}: Props) {
 
   return (
     <div className={cx("wrapper")}>
-      <h1>Sản phẩm</h1>
+      <h1>Điện thoại nổi bật</h1>
       <div className={cx("container")}>
         {dataTable.map((data: any) => (
           <ProductItem
@@ -37,10 +36,10 @@ function Home({}: Props) {
             name={data.name}
             image={data.image}
             originalPrice={data.originalPrice}
+            saleOffPrice={data.saleOffPrice}
           />
         ))}
       </div>
-      <Cart />
     </div>
   );
 }

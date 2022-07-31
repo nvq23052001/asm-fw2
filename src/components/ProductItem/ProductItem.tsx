@@ -1,41 +1,43 @@
 import className from "classnames/bind";
 import styles from "./ProductItem.module.scss";
-import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { CartIcon } from "~/Icons";
-import { cartActions } from "~/store";
 type Props = {
   id: number;
   name: string;
   image: string;
   originalPrice: string;
+  saleOffPrice: string;
 };
 
 const cx = className.bind(styles);
 
-function ProductItem({ id, name, image, originalPrice }: Props) {
-  const dispatch = useDispatch();
-
-  const addCartHandler = () => {
-    dispatch(
-      cartActions.add({
-        id: id,
-        name: name,
-        image: image,
-        originalPrice: originalPrice,
-        quantity: 1,
-      })
-    );
+function ProductItem({ id, name, image, originalPrice, saleOffPrice }: Props) {
+  const currency = (number: number) => {
+    return new Intl.NumberFormat("de-DE", {
+      style: "currency",
+      currency: "VND",
+    }).format(number);
   };
 
   return (
     <div className={cx("wrapper")}>
-      <p className={cx("product-name")}>{name}</p>
-      <img className={cx("product-image")} src={image} alt="" />
-      <p className={cx("product-price")}>{originalPrice} VND</p>
-      <button className={cx("product-btn")} onClick={addCartHandler}>
-        <CartIcon />
-      </button>
+      <Link to={`detail/${id}`}>
+        <img className={cx("product-image")} src={image} alt="" />
+        <p className={cx("product-name")}>{name}</p>
+        <div className={cx("product__price")}>
+          <p className={cx("product__price-original")}>
+            {currency(+originalPrice)}
+          </p>
+          <p className={cx("product__price-sale")}>
+            {currency(+originalPrice)}
+          </p>
+        </div>
+      </Link>
+      <div className={cx("deal")}>
+        [HOT] Thu cũ lên đời giá cao - Thủ tục nhanh - Trợ giá lên tới
+        1.000.000đ
+      </div>
     </div>
   );
 }

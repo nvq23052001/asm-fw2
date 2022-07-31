@@ -40,11 +40,11 @@ function Header() {
             </div>
           </div>
           <div className={cx("actions-info")}>
-            <CartIcon />
-            <div className={cx("actions-title")}>
+            <CartIcon color="" />
+            <Link to="/cart" className={cx("actions-title")}>
               <span>Giỏ</span>
               <span>hàng</span>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

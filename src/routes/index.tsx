@@ -7,10 +7,13 @@ import Products from "~/layouts/components/Admin/Products";
 import AdminLayout from "~/layouts/AdminLayout";
 import ProductAdd from "~/layouts/components/Admin/Products/ProductAdd.tsx/ProductAdd";
 import ProductEdit from "~/layouts/components/Admin/Products/ProductEdit";
+import NotSidebarLayout from "~/layouts/NotSidebarLayout";
+import Cart from "~/pages/Cart";
 
 const publicRoutes = [
   { path: config.router.home, component: Home },
-  { path: config.router.detail, component: Detail },
+  { path: config.router.detail, component: Detail, layout: NotSidebarLayout },
+  { path: config.router.cart, component: Cart, layout: NotSidebarLayout },
   { path: config.router.signin, component: Signin, layout: null },
   {
     path: config.router.productsAdmin,
